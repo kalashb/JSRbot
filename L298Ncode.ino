@@ -1,80 +1,59 @@
-#include <Servo.h>
-
-// Define Pin Connections
-#define motorA1 2
-#define motorA2 3
-#define motorB1 4
-#define motorB2 5
-#define leftSensor A0
-#define rightSensor A1
-#define obstacleSensorTrig 6
-#define obstacleSensorEcho 7
-#define ledPin 8
-
-Servo obstacleServo; // Create a servo object to control the obstacle sensor
+// Motor A connections
+const int enA = 9;
+const int in1 = 8;
+const int in2 = 7;
+// Motor B connections
+const int enB = 3;
+const int in3 = 5;
+const int in4 = 4;
 
 void setup() {
-  pinMode(motorA1, OUTPUT);
-  pinMode(motorA2, OUTPUT);
-  pinMode(motorB1, OUTPUT);
-  pinMode(motorB2, OUTPUT);
-  pinMode(obstacleSensorTrig, OUTPUT);
-  pinMode(obstacleSensorEcho, INPUT);
-  pinMode(ledPin, OUTPUT);
-
-  obstacleServo.attach(9); // Attach servo to pin 9
-
-  // Initialize Serial communication for debugging
-  Serial.begin(9600);
+	// Set all the motor control pins to outputs
+	pinMode(enA, OUTPUT);
+	pinMode(enB, OUTPUT);
+	pinMode(in1, OUTPUT);
+	pinMode(in2, OUTPUT);
+	pinMode(in3, OUTPUT);
+	pinMode(in4, OUTPUT);
+	
+	// Turn off motors - Initial state
+	digitalWrite(in1, LOW);
+	digitalWrite(in2, LOW);
+	digitalWrite(in3, LOW);
+	digitalWrite(in4, LOW);
 }
 
 void loop() {
-  // Call different functions based on the challenge courses
-  basicLineFollowing();
-  advancedLineFollowing();
-  obstacleDetection();
-  mazeNavigation();
+	directionControl();
+	delay(1000);
+	speedControl();
+	delay(1000);
 }
 
-void basicLineFollowing() {
-  // Implement code for basic line following
-  // Use line tracking sensors and motor control to follow a simple track
+// This function lets you control spinning direction of motors
+void directionControl() {
+	// Set motors to maximum speed
+	// For PWM maximum possible values are 0 to 255
+	analogWrite(enA, 255);
+	analogWrite(enB, 255);
+
+	// Turn on motor A & B
+	digitalWrite(in1, HIGH);
+	digitalWrite(in2, LOW);
+	digitalWrite(in3, HIGH);
+	digitalWrite(in4, LOW);
+	delay(2000);
+	
+	// Now change motor directions
+	digitalWrite(in1, LOW);
+	digitalWrite(in2, HIGH);
+	digitalWrite(in3, LOW);
+	digitalWrite(in4, HIGH);
+	delay(2000);
+	
+	// Turn off motors
+	digitalWrite(in1, LOW);
+	digitalWrite(in2, LOW);
+	digitalWrite(in3, LOW);
+	digitalWrite(in4, LOW);
 }
-
-void advancedLineFollowing() {
-  // Implement code for advanced line following
-  // Handle sharp turns and loops using the line tracking sensors
-}
-
-void obstacleDetection() {
-  // Implement code for obstacle detection and avoidance
-  if (detectObstacle()) {
-    avoidObstacle();
-  }
-}
-
-bool detectObstacle() {
-  // Use Ultrasonic Sensor to detect obstacles
-  digitalWrite(obstacleSensorTrig, LOW);
-  delayMicroseconds(2);
-  digitalWrite(obstacleSensorTrig, HIGH);
-  delayMicroseconds(10);
-  long duration = pulseIn(obstacleSensorEcho, HIGH);
-  int distance = duration * 0.034 / 2;
-
-  // Display distance for debugging
-  Serial.print("Distance: ");
-  Serial.println(distance);
-
-  return (distance < 20); // Adjust threshold as needed
-}
-
-void avoidObstacle() {
-  // Implement obstacle avoidance algorithm
-  // Use motor control to steer away from obstacles
-  digitalWrite(ledPin, HIGH); // Indicate obstacle avoidance with an LED
-  delay(1000);
-  digitalWrite(ledPin, LOW);
-}
-
-

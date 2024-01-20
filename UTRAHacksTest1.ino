@@ -15,5 +15,5 @@ Serial.print(" Analog = ");
 Serial.print(value_A0);
 Serial.print("\t Digital ="); 
 Serial.println(value_D0);
-delay(100);
+delay(100); //milliseconds
 }

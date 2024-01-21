@@ -1,5 +1,5 @@
 # JSRbot Description
-University of Toronto Robotics Association 2024 Hackathon Autonomous Vehicle Challenge
+University of Toronto Robotics Association 2024 Hackathon Autonomous Vehicle Challenge. This is an AV made with a limited list of components and facilities, competing against several other teams from all over Canada.
 
 # 1. Software
 ## 1.1 Challenge 1 and 2: Line Following
@@ -12,9 +12,9 @@ In this challenge, the team’s robot must follow a black line in a complex path
 ### 1.1.2 Code explanation
 Given 2 sensors, we made sure to not only follow the line but code for sharp turns and curves. 
 #### Method 1
-
+The sensors are set to go forward when both sensors get high reflections (both white) which ensures that at all times, the black strip or path will be between the sensors. This will make sure that the AV runs on it, given it starts on the line and the line is continuous. It turns left when it detects black on the left sensor and white on the right, and vice versa. When both sensors detect black, it randomizes Left and Right until it finds the path again. This is done by stopping and going a little forward in these cases and moving by small degrees, not enough to leave the path. 
 #### Method 2
-
+The sensors are set to go forward when say, the left wheel, is on the line. So when the left detects black and the right detects white, it goes ahead. This makes sure that the AV stays on track regardless of the direction the rest of the AV goes in. This became complicated as the AV started leaving the path without any chances of tracing back. Possibly could be solved by moving it backward and rotating it - which gives a 50% chance of tracing back its initial route to the starting point.
 ## 1.2 Challenge 3: 
 ### Description
 #### 1.2.1 Obstacle Detection

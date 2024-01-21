@@ -11,8 +11,28 @@ const int M_IN2 = 3; // left motor IN2
 const int M_IN3 = 4; // right motor IN2
 const int M_IN4 = 5; // right motor IN1
 
+const int trigPin = 6;
+const int echoPin = 7;
+
+const int obstacleThreshold = 10; // Distance in centimeters
+
 #define White 0
 #define Black 1
+
+void setup() {
+  // Set motor control pins to outputs
+  pinMode(motorA1, OUTPUT);
+  pinMode(motorA2, OUTPUT);
+  pinMode(motorB1, OUTPUT);
+  pinMode(motorB2, OUTPUT);
+  
+  // Set up ultrasonic sensor pins
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+
+  // Initialize serial communication for debugging
+  Serial.begin(9600);
+}
 
 void setup() {
 Serial.begin(9600);
@@ -20,6 +40,39 @@ pinMode (IR1_A, INPUT);
 pinMode (IR1_D, INPUT);
 
 }
+
+void loop() {
+  // Read distance from ultrasonic sensor
+  int distance = getDistance();
+
+  // Check for obstacle and adjust robot's movement
+  if (distance < obstacleThreshold) {
+    avoidObstacle();
+  } else {
+    // Continue forward if no obstacle detected
+    moveForward();
+  }
+}
+
+int getDistance() {
+  // Function to get distance from ultrasonic sensor
+
+  // Send ultrasonic pulse
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // Read the pulse duration from the echo pin
+  long duration = pulseIn(echoPin, HIGH);
+
+  // Convert the duration to distance in centimeters
+  int distance = duration * 0.034 / 2;
+
+  return distance;
+}
+
 int valueIR1_A;
 bool valueIR1_D;
 int valueIR2_A;
@@ -41,13 +94,13 @@ digitalWrite(M_IN2, HIGH);
 digitalWrite(M_IN3, LOW);
 digitalWrite(M_IN4, HIGH);
 }
-else if (IR1_D == White && IR2_D == Black){
+else if (IR1_D == White && IR2_D == Black){ //moveforward
 digitalWrite(M_IN1, HIGH);
 digitalWrite(M_IN2, LOW);
 digitalWrite(M_IN3, HIGH);
 digitalWrite(M_IN4, LOW);
 }
-else if (IR1_D == White && IR2_D == White){
+else if (IR1_D == White && IR2_D == White){ //avoidObstacle
 digitalWrite(M_IN1, HIGH);
 digitalWrite(M_IN2, LOW);
 digitalWrite(M_IN3, LOW);
@@ -61,5 +114,5 @@ Serial.print("\n Analog = ");
 Serial.print(A1_Voltage);
 Serial.print("\t Digital ="); 
 Serial.println(valueIR2_D);
-delay(100);
+delay(500);
 }

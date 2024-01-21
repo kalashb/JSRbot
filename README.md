@@ -30,6 +30,7 @@ Arduino Uno was used with the L298N Motor Driver Module. The wheels were made us
 
 ### L298N with DC Motor
 <img src="https://github.com/kalashb/JSRbot/assets/66458799/32b997a0-1271-45c7-b0e1-aa0ca6f68250" alt="Image of Combinations and outcomes of L298N with DC Motor" title="Figure: Combinations and outcomes of L298N with DC Motor" width="400" height="200">
+
 https://lastminuteengineers.com/l298n-dc-stepper-driver-arduino-tutorial/ 
 
 # 3. Mechanics

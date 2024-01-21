@@ -34,4 +34,4 @@ Arduino Uno was used with the L298N Motor Driver Module. The wheels were made us
 https://lastminuteengineers.com/l298n-dc-stepper-driver-arduino-tutorial/ 
 
 # 3. Mechanics
-Given with a pre laser-cut chassis from the hackathon organizers, we built our AV on the chassis with some scope for design.
+Given a pre-designed laser-cut chassis from the hackathon organizers, we built our AV on the chassis with some scope for design.

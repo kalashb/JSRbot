@@ -26,8 +26,10 @@ The team’s robot must detect and avoid obstacles in this course. Black lines w
 ### 1.3.2 Code explanation
 
 # 2. Hardware
+Arduino Uno was used with the L298N Motor Driver Module. The wheels were made using a DC Gearbox Motor - "TT Motor" - 200RPM - 3 to 6VDC and Gear Motor 3 - 224:1 90 Degree Shaft. 2 MH Infrared Line Tracking Sensor Modules were attached in the front to detect reflection/color. A Basic Ultrasonic Sensor helped detect the distances with a 9V battery (that died during testing). All were temporarily duct taped to the chassis for testing.   
 
 ### L298N with DC Motor
 <img src="https://github.com/kalashb/JSRbot/assets/66458799/32b997a0-1271-45c7-b0e1-aa0ca6f68250" alt="Image of Combinations and outcomes of L298N with DC Motor" title="Figure: Combinations and outcomes of L298N with DC Motor" width="400" height="200">
 
 # 3. Mechanics
+Given with a pre laser-cut chassis from the hackathon organizers, we built our AV on the chassis with some scope for design.
